@@ -13,8 +13,11 @@
 	},
 	"dependencies": {
 		"@opennextjs/cloudflare": "^1.6.1",
+		"bootstrap": "^5.3.7",
 		"next": "15.3.5",
+		"normalize.css": "^8.0.1",
 		"react": "^19.0.0",
+		"react-bootstrap": "^2.10.10",
 		"react-dom": "^19.0.0"
 	},
 	"devDependencies": {
