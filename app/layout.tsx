@@ -1,7 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Header } from '@/components/Header';
+import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
+import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
-
-// import 'normalize.css';
 
 export const metadata: Metadata = {
   title: 'As Above',
@@ -14,11 +14,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-bs-theme="dark">
+    <html lang="en" {...mantineHtmlProps}>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <ColorSchemeScript />
       </head>
-      <body>{children}</body>
+      <body>
+        <MantineProvider forceColorScheme="dark">
+          <Header />
+          {children}
+        </MantineProvider>
+      </body>
     </html>
   );
 }
