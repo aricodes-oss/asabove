@@ -2,9 +2,9 @@
 
 import { Burger, Container, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantinex/mantine-logo';
 import { useState } from 'react';
 
+import Clover from '../Clover';
 import classes from './Header.module.css';
 
 const links = [
@@ -36,7 +36,8 @@ export function Header() {
   return (
     <header className={classes.header}>
       <Container size="md" className={classes.inner}>
-        <MantineLogo size={28} />
+        <Clover />
+
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>
