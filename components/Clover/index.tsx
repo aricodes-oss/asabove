@@ -5,7 +5,7 @@ import blackClover from '../../asset-src/clover.svg';
 import classes from './Clover.module.css';
 
 interface Props {
-  dark: boolean;
+  dark?: boolean;
 }
 
 const defaultProps = {

@@ -1,4 +1,3 @@
-import { Header } from '@/components/Header';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
@@ -16,14 +15,12 @@ export default function RootLayout({
   return (
     <html lang="en" {...mantineHtmlProps}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider forceColorScheme="dark">
-          <Header />
-          {children}
-        </MantineProvider>
+        <MantineProvider forceColorScheme="dark">{children}</MantineProvider>
       </body>
     </html>
   );
