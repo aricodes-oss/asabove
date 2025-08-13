@@ -2,6 +2,8 @@ import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/c
 import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
 
+import theme from './theme';
+
 export const metadata: Metadata = {
   title: 'As Above',
   description: 'Shoegaze band from Portland, OR',
@@ -20,7 +22,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider forceColorScheme="dark">{children}</MantineProvider>
+        <MantineProvider forceColorScheme="dark" theme={theme}>
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

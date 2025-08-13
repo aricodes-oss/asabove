@@ -1,0 +1,19 @@
+$bg: rgba(78, 78, 78, 0.75);
+
+.root {
+  padding: 4px 24px;
+  margin: 0 0 32px 0;
+  background-color: $bg;
+  width: 100%;
+
+  .brand {
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  @include mt.larger-than(mt.$breakpoint-sm) {
+    border-radius: 20px;
+    margin: 32px 0;
+  }
+}

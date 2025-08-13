@@ -1,0 +1,68 @@
+@use 'sass:math';
+
+$transparent-black: rgba(0, 0, 0, 0.6);
+$transparent-white: rgba(255, 255, 255, 0.75);
+$transparent-sepia: rgba(255, 126, 75, 0.15);
+
+// Define variables for your breakpoints,
+// values must be the same as in your theme
+$breakpoint-xs: '36em';
+$breakpoint-sm: '48em';
+$breakpoint-md: '62em';
+$breakpoint-lg: '75em';
+$breakpoint-xl: '88em';
+
+@function rem($value) {
+  @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
+}
+
+@mixin light {
+  [data-mantine-color-scheme='light'] & {
+    @content;
+  }
+}
+
+@mixin dark {
+  [data-mantine-color-scheme='dark'] & {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      @content;
+    }
+  }
+}
+
+@mixin smaller-than($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin larger-than($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Add direction mixins if you need rtl support
+@mixin rtl {
+  [dir='rtl'] & {
+    @content;
+  }
+}
+
+@mixin ltr {
+  [dir='ltr'] & {
+    @content;
+  }
+}

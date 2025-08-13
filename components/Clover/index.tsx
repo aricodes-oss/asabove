@@ -12,8 +12,13 @@ const defaultProps = {
   dark: false,
 };
 
-export default function Clover({ dark }: Props = defaultProps) {
+export default function Clover({ dark, ...props }: Props = defaultProps) {
   return (
-    <Image src={dark ? blackClover : whiteClover} alt="Clover icon" className={classes.root} />
+    <Image
+      src={dark ? blackClover : whiteClover}
+      alt="Clover icon"
+      className={classes.root}
+      {...props}
+    />
   );
 }
