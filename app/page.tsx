@@ -21,10 +21,8 @@ export default function Home() {
           <Box hiddenFrom="md">
             <Navigation />
           </Box>
-          <Container>
-            <Box visibleFrom="md">
-              <Navigation />
-            </Box>
+          <Container visibleFrom="md">
+            <Navigation />
           </Container>
         </div>
       </div>
