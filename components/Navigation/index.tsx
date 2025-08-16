@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Burger, Button, Container, Flex, Group, Text } from '@mantine/core';
+import { ActionIcon, Burger, Button, Flex, Group, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconBrandBandcamp,

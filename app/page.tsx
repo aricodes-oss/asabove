@@ -1,7 +1,8 @@
 import headerBackground from '@/asset-src/photos/_DSF1177.jpg';
 import heroLogo from '@/asset-src/upside down 2.svg';
+import MailingList from '@/components/MailingList';
 import Navigation from '@/components/Navigation';
-import { Box, Container, Flex, Stack, Typography } from '@mantine/core';
+import { Box, Container, Flex } from '@mantine/core';
 import Image from 'next/image';
 
 import classes from './Home.module.scss';
@@ -43,9 +44,7 @@ export default function Home() {
                 className={classes.left}
               />
               <Flex direction="column" justify="space-between" className={classes.right} gap="md">
-                <Typography>
-                  <div className="ml-embedded" data-form="G6C5AA" />
-                </Typography>
+                <MailingList />
                 <iframe
                   width="560"
                   height="315"
@@ -55,6 +54,7 @@ export default function Home() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
+                  className={classes.video}
                 />
               </Flex>
             </Flex>
