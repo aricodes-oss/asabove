@@ -2,6 +2,38 @@
   height: 100vh;
   width: 100vw;
   z-index: 1;
+  position: relative;
+
+  .hero {
+    padding-top: 64px;
+    height: 100%;
+
+    .inner {
+      @include mt.smaller-than(mt.$breakpoint-md) {
+        flex-direction: column;
+      }
+
+      @include mt.larger-than(mt.$breakpoint-md) {
+        height: 80%;
+      }
+    }
+
+    .left {
+      object-fit: scale-down;
+      @include mt.larger-than(mt.$breakpoint-md) {
+        align-self: flex-start;
+      }
+    }
+
+    .right {
+      flex-grow: 1;
+      flex-direction: column-reverse;
+      @include mt.larger-than(mt.$breakpoint-md) {
+        flex-direction: column;
+        align-self: flex-end;
+      }
+    }
+  }
 
   .background,
   .content {
@@ -20,6 +52,7 @@
   .content {
     z-index: 1;
     background: #000000;
+    position: relative;
 
     background: radial-gradient(circle, mt.$transparent-sepia 0% 20%, black 100%);
   }

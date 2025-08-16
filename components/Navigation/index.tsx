@@ -1,6 +1,6 @@
 'use client';
 
-import { Burger, Button, Flex, Text } from '@mantine/core';
+import { ActionIcon, Burger, Button, Container, Flex, Group, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconBrandBandcamp,
@@ -11,7 +11,7 @@ import {
   IconCalendarEvent,
   IconHome,
 } from '@tabler/icons-react';
-import classNames from 'classnames';
+import cx from 'clsx';
 import { Orbitron } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -61,24 +61,40 @@ export default function Navigation() {
   };
 
   return (
-    <div className={classNames(classes.root)}>
-      <Flex direction="row" align="center" justify="flex-start" gap="xs">
-        <Burger opened={opened} onClick={toggle} aria-label="Toggle navigation" hiddenFrom="md" />
-        <Text component={Link} className={classNames(classes.brand, brandFont.className)} href="/">
-          As Above
-        </Text>
-        {links.map(link => (
-          <Button
-            variant="subtle"
-            color={pathname === link.href ? 'orange' : 'white'}
-            component={Link}
-            href={link.href}
-            key={link.href}
-            visibleFrom="md"
-          >
-            {link.text}
-          </Button>
-        ))}
+    <div className={cx(classes.root)}>
+      <Flex direction="row" align="center" justify="space-between">
+        <Flex direction="row" align="center" justify="flex-start" gap="sm">
+          <Burger opened={opened} onClick={toggle} aria-label="Toggle navigation" hiddenFrom="md" />
+          <Text component={Link} className={cx(classes.brand, brandFont.className)} href="/">
+            As Above
+          </Text>
+          {links.map(link => (
+            <Button
+              variant="subtle"
+              color={pathname === link.href ? 'orange' : 'white'}
+              component={Link}
+              href={link.href}
+              key={link.href}
+              visibleFrom="md"
+            >
+              {link.text}
+            </Button>
+          ))}
+        </Flex>
+        <Group visibleFrom="md" gap="md">
+          {socials.map(link => (
+            <ActionIcon
+              color="white"
+              key={link.href}
+              aria-label={link.text}
+              component={Link}
+              href={link.href}
+              variant="subtle"
+            >
+              <link.icon />
+            </ActionIcon>
+          ))}
+        </Group>
       </Flex>
 
       <MobileDrawer

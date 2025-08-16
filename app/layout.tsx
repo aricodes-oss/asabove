@@ -25,6 +25,7 @@ export default function RootLayout({
           data-domain="asabovesound.com"
           src="https://plausible.aricodes.net/js/script.outbound-links.js"
         />
+        <Script defer src="/mailerlite.js" />
         <ColorSchemeScript />
       </head>
       <body>
