@@ -1,8 +1,9 @@
 import headerBackground from '@/asset-src/photos/_DSF1177.jpg';
 import heroLogo from '@/asset-src/upside down 2.svg';
-import MailingList from '@/components/MailingList';
 import Navigation from '@/components/Navigation';
-import { Box, Container, Flex } from '@mantine/core';
+import PromoVideo from '@/components/PromoVideo';
+import Shows from '@/components/Shows';
+import { Box, Container, Flex, Title } from '@mantine/core';
 import Image from 'next/image';
 
 import classes from './Home.module.scss';
@@ -33,6 +34,7 @@ export default function Home() {
             <Flex
               justify="space-between"
               align="center"
+              direction="column"
               className={classes.inner}
               columnGap={28}
               rowGap={28}
@@ -44,23 +46,19 @@ export default function Home() {
                 className={classes.left}
               />
               <Flex direction="column" justify="space-between" className={classes.right} gap="md">
-                <MailingList />
-                <iframe
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/7Mf1tcQAbGI?si=zbdLzhlEXkutoC3a"
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  className={classes.video}
-                />
+                <PromoVideo />
               </Flex>
             </Flex>
           </Flex>
         </div>
       </div>
+
+      <Container size="sm">
+        <Title order={1} mb="sm">
+          Shows
+        </Title>
+        <Shows />
+      </Container>
     </>
   );
 }

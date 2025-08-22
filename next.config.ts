@@ -4,8 +4,19 @@ import type { NextConfig } from 'next';
 import path from 'node:path';
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        pathname: '/**',
+      },
+      { protocol: 'https', hostname: 'drive-thirdparty.googleusercontent.com', pathname: '/**' },
+    ],
+  },
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
+    useCache: true,
   },
   sassOptions: {
     implementation: 'sass-embedded',

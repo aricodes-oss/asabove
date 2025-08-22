@@ -23,7 +23,7 @@ const brandFont = Orbitron({ weight: ['400'], subsets: ['latin'] });
 
 const links = [
   { text: 'Home', href: '/', icon: IconHome },
-  { text: 'Shows', href: '/schedule', icon: IconCalendarEvent },
+  { text: 'Shows', href: '#shows', icon: IconCalendarEvent },
 ];
 
 const socials = [

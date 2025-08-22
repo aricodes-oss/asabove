@@ -1,3 +1,4 @@
+import ScrollToTop from '@/components/ScrollToTop';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body>
         <MantineProvider forceColorScheme="dark" theme={theme}>
           {children}
+          <ScrollToTop />
         </MantineProvider>
       </body>
     </html>
