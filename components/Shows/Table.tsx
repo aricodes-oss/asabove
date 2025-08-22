@@ -51,7 +51,7 @@ export default function Table(props: TableProps) {
   };
 
   return (
-    <Center>
+    <Center mb="md">
       <a id="shows" />
       <Stack>
         <SegmentedControl value={selected} onChange={setSelected} data={segments} />

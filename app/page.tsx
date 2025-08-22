@@ -1,5 +1,6 @@
 import headerBackground from '@/asset-src/photos/_DSF1177.jpg';
 import heroLogo from '@/asset-src/upside down 2.svg';
+import MailingList from '@/components/MailingList';
 import Navigation from '@/components/Navigation';
 import PromoVideo from '@/components/PromoVideo';
 import Shows from '@/components/Shows';
@@ -58,6 +59,8 @@ export default function Home() {
           Shows
         </Title>
         <Shows />
+
+        <MailingList />
       </Container>
     </>
   );
