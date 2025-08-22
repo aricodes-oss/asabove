@@ -40,6 +40,6 @@
 		"prettier": "^3.6.2",
 		"sass-embedded": "^1.90.0",
 		"typescript": "^5",
-		"wrangler": "^4.26.0"
+		"wrangler": "^4.32.0"
 	}
 }
