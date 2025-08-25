@@ -1,10 +1,12 @@
 'use cache';
 
-import { calendar, calendarId } from '@/constants';
+// Temporarily disabled so we can render on cloudflare
+// import { calendar, calendarId } from '@/constants';
 import { calendar_v3 } from '@googleapis/calendar';
 import { Text } from '@mantine/core';
 
 import Table from './Table';
+import items from './items.json';
 
 const FALLBACK_DATE = '2005-06-07';
 
@@ -14,7 +16,8 @@ const startTime = (show: calendar_v3.Schema$Event) =>
 export default async function Shows() {
   'use cache';
   // Fetch all events we can see
-  const events = await calendar.events.list({ calendarId, maxResults: 2500 });
+  // const events = await calendar.events.list({ calendarId, maxResults: 2500 });
+  const events = { data: { items } };
 
   // If we have none, show some text
   if (!events.data.items) {

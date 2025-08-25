@@ -10,7 +10,7 @@ import {
   TableData,
   Text,
 } from '@mantine/core';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { titleCase } from 'title-case';
@@ -22,10 +22,10 @@ interface TableProps {
 
 const segments = ['upcoming', 'past'].map(t => ({ label: titleCase(t), value: t }));
 
-const posterFor = (event: calendar_v3.Schema$Event) =>
-  event.attachments && event.attachments.length === 1 ? (
-    <Image src={event.attachments[0].iconLink as string} alt="Show poster" fill={true} />
-  ) : null;
+// const posterFor = (event: calendar_v3.Schema$Event) =>
+//   event.attachments && event.attachments.length === 1 ? (
+//     <Image src={event.attachments[0].iconLink as string} alt="Show poster" fill={true} />
+//   ) : null;
 
 export default function Table(props: TableProps) {
   const [selected, setSelected] = useState<string>(segments[0].value);
@@ -36,13 +36,12 @@ export default function Table(props: TableProps) {
   }
 
   const data: TableData = {
-    body: events.map((event, idx) => [
+    body: events.map(event => [
       event.start?.date,
       <Stack key={event.id}>
         <Text size="lg" fw={700}>
           {event.summary}
         </Text>
-        {idx === 0 && posterFor(event)}
       </Stack>,
       <Button component={Link} href={event.htmlLink as string} variant="subtle" key={event.id}>
         Details
