@@ -4,6 +4,7 @@
   z-index: 1;
   position: relative;
   box-shadow: black 0px 0px 24px;
+  overflow: hidden; // Tilt/transform effects
   /* margin-bottom: 24px; */
 
   .hero {
@@ -58,12 +59,15 @@
 
   .background {
     z-index: -1;
+    perspective: 10px;
+    transform-style: preserve-3d;
   }
 
   .content {
     z-index: 1;
     background: #000000;
     position: relative;
+    perspective: 1000px;
 
     background: radial-gradient(circle, mt.$transparent-sepia 0% 20%, black 100%);
   }
