@@ -14,7 +14,7 @@ import { useMemo } from 'react';
 import classes from './Header.module.scss';
 
 const MAX_OFFSET = 35;
-const TILT_SCALE = 4;
+const TILT_SCALE = 2.5;
 
 export default function Header() {
   const { ref: mouseRef, x, y } = useMouse();
@@ -31,7 +31,7 @@ export default function Header() {
 
   // Computed style declarations
   const translate = {
-    transform: `translate(${-xOffset}px, ${-yOffset}px)`,
+    transform: `translate(${xOffset}px, ${-yOffset}px)`,
   };
 
   const tilt = {
