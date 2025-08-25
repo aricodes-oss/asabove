@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Burger, Button, Flex, Group, Text } from '@mantine/core';
+import { ActionIcon, Burger, Button, Flex, Group, HoverCard, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconBrandBandcamp,
@@ -83,16 +83,24 @@ export default function Navigation() {
         </Flex>
         <Group visibleFrom="md" gap="md">
           {socials.map(link => (
-            <ActionIcon
-              color="white"
-              key={link.href}
-              aria-label={link.text}
-              component={Link}
-              href={link.href}
-              variant="subtle"
-            >
-              <link.icon />
-            </ActionIcon>
+            <HoverCard shadow="md" key={link.href}>
+              <HoverCard.Target>
+                <ActionIcon
+                  color="white"
+                  key={link.href}
+                  aria-label={link.text}
+                  component={Link}
+                  href={link.href}
+                  variant="subtle"
+                >
+                  <link.icon />
+                </ActionIcon>
+              </HoverCard.Target>
+
+              <HoverCard.Dropdown>
+                <Text size="sm">{link.text}</Text>
+              </HoverCard.Dropdown>
+            </HoverCard>
           ))}
         </Group>
       </Flex>
