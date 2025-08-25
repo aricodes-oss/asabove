@@ -16,29 +16,34 @@ import classes from './Header.module.scss';
 const MAX_OFFSET = 35;
 const TILT_SCALE = 2.5;
 
+interface TranslationInput {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  scale?: number;
+}
+
+const translateFor = ({ x, y, width, height, scale = 1 }: TranslationInput) => ({
+  xOffset: (MAX_OFFSET / 2 - Math.min(1, Math.max(0, x / width)) * MAX_OFFSET) / scale,
+  yOffset: (Math.min(1, Math.max(0, y / height)) * MAX_OFFSET - MAX_OFFSET / 2) / scale,
+});
+
 export default function Header() {
   const { ref: mouseRef, x, y } = useMouse();
   const { ref: sizeRef, width, height } = useElementSize();
   const ref = useMergedRef(mouseRef, sizeRef);
 
-  const { xOffset, yOffset } = useMemo(
-    () => ({
-      xOffset: MAX_OFFSET / 2 - Math.min(1, Math.max(0, x / width)) * MAX_OFFSET,
-      yOffset: Math.min(1, Math.max(0, y / height)) * MAX_OFFSET - MAX_OFFSET / 2,
-    }),
-    [x, y, width, height],
-  );
+  const { xOffset, yOffset } = translateFor({ x, y, width, height });
 
   // Computed style declarations
-  const translate = {
+  const foreground = {
     transform: `translate(${xOffset}px, ${-yOffset}px)`,
   };
 
-  const tilt = {
-    transform: `rotateX(calc(${-xOffset / TILT_SCALE} * 1deg)) rotateY(calc(${yOffset / (TILT_SCALE * 2)} * 1deg))`,
+  const background = {
+    transform: `translate(${xOffset / TILT_SCALE}px, ${-yOffset / TILT_SCALE}px)`,
   };
-
-  console.log(tilt.transform);
 
   return (
     <div className={classes.header} ref={ref}>
@@ -48,7 +53,7 @@ export default function Header() {
         className={classes.background}
         fill={true}
         unoptimized={false}
-        style={tilt}
+        style={background}
       />
 
       <div className={classes.content}>
@@ -69,7 +74,7 @@ export default function Header() {
             className={classes.inner}
             columnGap={28}
             rowGap={28}
-            style={translate}
+            style={foreground}
           >
             <Image
               src={heroLogo}
