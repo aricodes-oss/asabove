@@ -2,14 +2,11 @@
 
 import headerBackground from '@/asset-src/photos/_DSF1177.jpg';
 import heroLogo from '@/asset-src/upside down 2.svg';
-// import MailingList from '@/components/MailingList';
 import Navigation from '@/components/Navigation';
 import PromoVideo from '@/components/PromoVideo';
-// import Shows from '@/components/Shows';
 import { Box, Container, Flex } from '@mantine/core';
 import { useElementSize, useMergedRef, useMouse } from '@mantine/hooks';
 import Image from 'next/image';
-import { useMemo } from 'react';
 
 import classes from './Header.module.scss';
 
@@ -42,7 +39,7 @@ export default function Header() {
   };
 
   const background = {
-    transform: `translate(${xOffset / TILT_SCALE}px, ${-yOffset / TILT_SCALE}px)`,
+    transform: `translate(${xOffset / TILT_SCALE}px, 0)`,
   };
 
   return (
