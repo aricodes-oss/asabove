@@ -14,7 +14,7 @@ const startTime = (show: calendar_v3.Schema$Event) =>
 export default async function Shows() {
   'use cache';
   // Fetch all events we can see
-  const events = await calendar.events.list({ calendarId, maxResults: 2500 });
+  const events = await calendar.events.list({ calendarId, maxResults: 1500 });
   // const events = { data: { items } };
 
   // If we have none, show some text
