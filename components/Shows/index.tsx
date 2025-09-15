@@ -38,6 +38,7 @@ export default async function Shows() {
     return <Table {...{ upcoming, past }} />;
   } catch (e) {
     console.error('CALENDAR', e);
+    console.error('CALENDAR', process.env.GOOGLE_CALENDAR_API_KEY);
     return <Text>Unable to pull show information, check back later!</Text>;
   }
 }
