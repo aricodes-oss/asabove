@@ -12,7 +12,6 @@ const startTime = (show: calendar_v3.Schema$Event) =>
   new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
 
 export default async function Shows() {
-  'use cache';
   // Fetch all events we can see
   try {
     const events = await calendar.events.list({ calendarId, maxResults: 1500 });
