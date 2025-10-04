@@ -1,23 +1,27 @@
 'use cache';
 
-import { calendar, calendarId } from '@/constants';
-import { calendar_v3 } from '@googleapis/calendar';
+import { getCalendarEvents } from '@/constants';
 import { Text } from '@mantine/core';
 
 import Table from './Table';
 
+interface CalendarEvent {
+  start?: { date?: string; dateTime?: string };
+  [key: string]: any;
+}
+
 const FALLBACK_DATE = '2005-06-07';
 
-const startTime = (show: calendar_v3.Schema$Event) =>
+const startTime = (show: CalendarEvent) =>
   new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
 
 export default async function Shows() {
   // Fetch all events we can see
   try {
-    const events = await calendar.events.list({ calendarId, maxResults: 1500 });
+    const events = await getCalendarEvents(1500);
 
     // If we have none, show some text
-    if (!events.data.items) {
+    if (!events.items) {
       return <Text>Unable to pull show information, check back later!</Text>;
     }
 
@@ -27,8 +31,8 @@ export default async function Shows() {
     const daysUntil = (date: Date) =>
       Math.ceil((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-    const shows = events.data.items.toSorted(
-      (a, b) => daysUntil(startTime(a)) - daysUntil(startTime(b)),
+    const shows = events.items.toSorted(
+      (a: CalendarEvent, b: CalendarEvent) => daysUntil(startTime(a)) - daysUntil(startTime(b)),
     );
 
     const upcoming = shows.filter(show => daysUntil(startTime(show)) >= 0);
