@@ -1,82 +1,44 @@
-'use client';
+'use cache';
 
-import { calendarId } from '@/constants';
+import { calendar, calendarId } from '@/constants';
+import { calendar_v3 } from '@googleapis/calendar';
 import { Text } from '@mantine/core';
-import { useEffect, useState } from 'react';
 
 import Table from './Table';
 
-interface CalendarEvent {
-  start?: { date?: string; dateTime?: string };
-  [key: string]: any;
-}
-
-const API_KEY = 'AIzaSyA6L78tfEYyBD7QcgFm5_wk3g3otJohoFg';
 const FALLBACK_DATE = '2005-06-07';
 
-const startTime = (show: CalendarEvent) =>
+const startTime = (show: calendar_v3.Schema$Event) =>
   new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
 
-async function fetchCalendarEvents(maxResults = 1500) {
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?key=${API_KEY}&maxResults=${maxResults}`;
+export default async function Shows() {
+  'use cache';
+  // Fetch all events we can see
+  try {
+    const events = await calendar.events.list({ calendarId, maxResults: 1500 });
 
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Google Calendar API error: ${response.status} ${response.statusText}`);
-  }
-
-  const data = await response.json();
-  return data;
-}
-
-export default function Shows() {
-  const [events, setEvents] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function loadEvents() {
-      try {
-        setLoading(true);
-        const data = await fetchCalendarEvents(1500);
-        setEvents(data);
-      } catch (e) {
-        console.error('CALENDAR', e);
-        setError('Unable to pull show information, check back later!');
-      } finally {
-        setLoading(false);
-      }
+    // If we have none, show some text
+    if (!events.data.items) {
+      return <Text>Unable to pull show information, check back later!</Text>;
     }
 
-    loadEvents();
-  }, []);
+    // Otherwise, sort into upcoming and past
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const daysUntil = (date: Date) =>
+      Math.ceil((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-  if (loading) {
-    return <Text>Loading shows...</Text>;
-  }
+    const shows = events.data.items.toSorted(
+      (a, b) => daysUntil(startTime(a)) - daysUntil(startTime(b)),
+    );
 
-  if (error) {
-    return <Text>{error}</Text>;
-  }
+    const upcoming = shows.filter(show => daysUntil(startTime(show)) >= 0);
+    const past = shows.filter(show => daysUntil(startTime(show)) < 0);
 
-  // If we have none, show some text
-  if (!events?.items) {
+    return <Table {...{ upcoming, past }} />;
+  } catch (e) {
+    console.error('CALENDAR', e);
+    console.error('CALENDAR', process.env.GOOGLE_CALENDAR_API_KEY);
     return <Text>Unable to pull show information, check back later!</Text>;
   }
-
-  // Otherwise, sort into upcoming and past
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const daysUntil = (date: Date) =>
-    Math.ceil((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-
-  const shows = events.items.toSorted(
-    (a: CalendarEvent, b: CalendarEvent) => daysUntil(startTime(a)) - daysUntil(startTime(b)),
-  );
-
-  const upcoming = shows.filter(show => daysUntil(startTime(show)) >= 0);
-  const past = shows.filter(show => daysUntil(startTime(show)) < 0);
-
-  return <Table {...{ upcoming, past }} />;
 }
