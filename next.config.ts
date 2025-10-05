@@ -1,9 +1,8 @@
-// added by create cloudflare to enable calling `getCloudflareContext()` in `next dev`
-import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
 import type { NextConfig } from 'next';
 import path from 'node:path';
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
@@ -25,5 +24,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
-initOpenNextCloudflareForDev();
