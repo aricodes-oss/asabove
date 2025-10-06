@@ -1,23 +1,27 @@
 'use client';
 
+import { chunk } from '@/utils';
 import { calendar_v3 } from '@googleapis/calendar';
 import {
   Button,
   Center,
   Table as MantineTable,
+  Pagination,
   SegmentedControl,
+  Spoiler,
   Stack,
   TableData,
   Text,
 } from '@mantine/core';
 // import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { titleCase } from 'title-case';
 
-interface TableProps {
-  upcoming: calendar_v3.Schema$Event[];
-  past: calendar_v3.Schema$Event[];
+export interface ShowsProps {
+  upcoming?: calendar_v3.Schema$Event[];
+  past?: calendar_v3.Schema$Event[];
 }
 
 const segments = ['upcoming', 'past'].map(t => ({ label: titleCase(t), value: t }));
@@ -27,20 +31,28 @@ const segments = ['upcoming', 'past'].map(t => ({ label: titleCase(t), value: t 
 //     <Image src={event.attachments[0].iconLink as string} alt="Show poster" fill={true} />
 //   ) : null;
 
-export default function Table(props: TableProps) {
+export default function Shows(props: ShowsProps) {
+  const [activePage, setPage] = useState(1);
   const [selected, setSelected] = useState<string>(segments[0].value);
-  const events = props[selected as keyof TableProps];
+  const events = props[selected as keyof ShowsProps];
 
   if (!events) {
     return null;
   }
 
+  const chunks = chunk(events, 3);
+  if (selected === segments[1].value) {
+    chunks.reverse();
+  }
+
   const data: TableData = {
-    body: events.map(event => [
+    body: chunks[Math.min(activePage - 1, chunks.length - 1)].map(event => [
       event.start?.date,
       <Stack key={event.id}>
-        <Text size="lg" fw={700}>
-          {event.summary}
+        <Text size="md" fw={700}>
+          <Spoiler maxHeight={26} hideLabel="Less" showLabel="...">
+            {event.summary}
+          </Spoiler>
         </Text>
       </Stack>,
       <Button component={Link} href={event.htmlLink as string} variant="subtle" key={event.id}>
@@ -50,11 +62,20 @@ export default function Table(props: TableProps) {
   };
 
   return (
-    <Center mb="md">
+    <Center>
       <a id="shows" />
       <Stack>
         <SegmentedControl value={selected} onChange={setSelected} data={segments} />
         <MantineTable striped withRowBorders highlightOnHover withTableBorder data={data} />
+        {chunks.length > 1 && (
+          <Pagination
+            total={chunks.length}
+            value={activePage}
+            onChange={setPage}
+            mt="xs"
+            style={{ alignSelf: 'center' }}
+          />
+        )}
       </Stack>
     </Center>
   );

@@ -5,7 +5,10 @@
   position: relative;
   box-shadow: black 0px 0px 24px;
   overflow: hidden; // Tilt/transform effects
-  margin-bottom: 24px;
+
+  &:not(:only-child) {
+    margin-bottom: 24px;
+  }
 
   .hero {
     padding-top: 64px;
@@ -30,19 +33,6 @@
       @include mt.larger-than(mt.$breakpoint-md) {
         align-self: flex-start;
         max-height: 40vh;
-      }
-    }
-
-    .right {
-      flex-grow: 2;
-      flex-direction: column;
-
-      @include mt.smaller-than(mt.$breakpoint-md) {
-        display: none;
-      }
-
-      @include mt.larger-than(mt.$breakpoint-md) {
-        flex-direction: column-reverse;
       }
     }
   }

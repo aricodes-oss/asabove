@@ -4,11 +4,17 @@ import headerBackground from '@/asset-src/photos/_DSF1177.jpg';
 import heroLogo from '@/asset-src/upside down 2.svg';
 import Navigation from '@/components/Navigation';
 import PromoVideo from '@/components/PromoVideo';
-import { Box, Container, Flex } from '@mantine/core';
+import { Box, Container, Flex, Paper, Title } from '@mantine/core';
 import { useElementSize, useMergedRef, useMouse } from '@mantine/hooks';
+import { IconCircleArrowDown } from '@tabler/icons-react';
 import Image from 'next/image';
 
+import Shows, { type ShowsProps } from '../Shows';
 import classes from './Header.module.scss';
+
+export interface HeaderProps {
+  shows: ShowsProps;
+}
 
 const MAX_OFFSET = 35;
 const TILT_SCALE = 2.5;
@@ -26,7 +32,7 @@ const translateFor = ({ x, y, width, height, scale = 1 }: TranslationInput) => (
   yOffset: (Math.min(1, Math.max(0, y / height)) * MAX_OFFSET - MAX_OFFSET / 2) / scale,
 });
 
-export default function Header() {
+export default function Header({ shows }: HeaderProps) {
   const { ref: mouseRef, x, y } = useMouse();
   const { ref: sizeRef, width, height } = useElementSize();
   const ref = useMergedRef(mouseRef, sizeRef);
@@ -63,26 +69,46 @@ export default function Header() {
           <Navigation />
         </Container>
 
-        <Flex justify="center" align="center" direction="column" className={classes.hero}>
-          <Flex
-            justify="space-between"
-            align="center"
-            direction="column"
-            className={classes.inner}
-            columnGap={28}
-            rowGap={28}
-            style={foreground}
-          >
-            <Image
-              src={heroLogo}
-              alt="As Above logo"
-              unoptimized={false}
-              className={classes.left}
-            />
-            <Flex direction="column" justify="space-between" className={classes.right} gap="md">
-              <PromoVideo />
-            </Flex>
+        {/* Desktop hero (Logo, shows. mailing list) */}
+        <Flex
+          justify="space-between"
+          align="center"
+          direction="row"
+          visibleFrom="md"
+          style={{ height: '100%', ...foreground }}
+        >
+          <Image src={heroLogo} alt="As Above logo" unoptimized={false} />
+          <Flex justify="space-between" align="center" direction="column">
+            <Container size="xs">
+              <Paper p="sm" shadow="xl" mr="xl" mb="xl">
+                <Title order={2} mb="sm">
+                  Shows
+                </Title>
+                <Shows {...shows} />
+              </Paper>
+            </Container>
+            <PromoVideo />
           </Flex>
+        </Flex>
+
+        {/* Mobile stacked header */}
+        <Flex
+          justify="center"
+          align="center"
+          direction="column"
+          className={classes.hero}
+          hiddenFrom="md"
+          style={foreground}
+        >
+          <Image src={heroLogo} alt="As Above logo" unoptimized={false} className={classes.left} />
+          <Container size="xs">
+            <Paper p="sm" shadow="sm" my="sm">
+              <Title order={2} mb="sm">
+                Shows
+              </Title>
+              <Shows {...shows} />
+            </Paper>
+          </Container>
         </Flex>
       </div>
     </div>

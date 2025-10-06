@@ -4,6 +4,7 @@ import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 
+import Providers from './providers';
 import theme from './theme';
 
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider forceColorScheme="dark" theme={theme}>
-          {children}
+          <Providers>{children}</Providers>
           <ScrollToTop />
         </MantineProvider>
       </body>
