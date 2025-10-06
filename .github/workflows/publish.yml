@@ -5,7 +5,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.platform.github }}
     permissions:
       packages: write
       contents: read
@@ -13,12 +13,14 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - linux/amd64
-          - linux/arm64
+          - docker: linux/amd64
+            github: ubuntu-latest
+          - docker: linux/arm64
+            github: ubuntu-24.04-arm
     steps:
       - name: Prepare
         run: |
-          platform=${{ matrix.platform }}
+          platform=${{ matrix.platform.docker }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
       - name: Docker meta
@@ -40,10 +42,10 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
-          platforms: ${{ matrix.platform }}
+          platforms: ${{ matrix.platform.docker }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ env.REGISTRY_IMAGE }}
-          build-args: "GOOGLE_CALENDAR_API_KEY=${{ secrets.GOOGLE_CALENDAR_API_KEY }}"
+          build-args: 'GOOGLE_CALENDAR_API_KEY=${{ secrets.GOOGLE_CALENDAR_API_KEY }}'
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
