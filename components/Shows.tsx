@@ -1,5 +1,6 @@
 'use client';
 
+import { getShows } from '@/api';
 import { chunk } from '@/utils';
 import { calendar_v3 } from '@googleapis/calendar';
 import {
@@ -13,9 +14,9 @@ import {
   TableData,
   Text,
 } from '@mantine/core';
+import { useQuery } from '@tanstack/react-query';
 // import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { titleCase } from 'title-case';
 
@@ -32,9 +33,10 @@ const segments = ['upcoming', 'past'].map(t => ({ label: titleCase(t), value: t 
 //   ) : null;
 
 export default function Shows(props: ShowsProps) {
+  const showQuery = useQuery({ queryKey: ['shows'], queryFn: getShows, initialData: props });
   const [activePage, setPage] = useState(1);
   const [selected, setSelected] = useState<string>(segments[0].value);
-  const events = props[selected as keyof ShowsProps];
+  const events = showQuery.data![selected as keyof ShowsProps];
 
   if (!events) {
     return null;
@@ -49,11 +51,11 @@ export default function Shows(props: ShowsProps) {
     body: chunks[Math.min(activePage - 1, chunks.length - 1)].map(event => [
       event.start?.date,
       <Stack key={event.id}>
-        <Text size="md" fw={700}>
-          <Spoiler maxHeight={26} hideLabel="Less" showLabel="...">
+        <Spoiler maxHeight={26} hideLabel="Less" showLabel="...">
+          <Text size="lg" fw={700}>
             {event.summary}
-          </Spoiler>
-        </Text>
+          </Text>
+        </Spoiler>
       </Stack>,
       <Button component={Link} href={event.htmlLink as string} variant="subtle" key={event.id}>
         Details

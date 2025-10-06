@@ -6,8 +6,8 @@ import Navigation from '@/components/Navigation';
 import PromoVideo from '@/components/PromoVideo';
 import { Box, Container, Flex, Paper, Title } from '@mantine/core';
 import { useElementSize, useMergedRef, useMouse } from '@mantine/hooks';
-import { IconCircleArrowDown } from '@tabler/icons-react';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 import Shows, { type ShowsProps } from '../Shows';
 import classes from './Header.module.scss';
@@ -70,26 +70,27 @@ export default function Header({ shows }: HeaderProps) {
         </Container>
 
         {/* Desktop hero (Logo, shows. mailing list) */}
-        <Flex
-          justify="space-between"
-          align="center"
-          direction="row"
-          visibleFrom="md"
-          style={{ height: '100%', ...foreground }}
-        >
-          <Image src={heroLogo} alt="As Above logo" unoptimized={false} />
-          <Flex justify="space-between" align="center" direction="column">
-            <Container size="xs">
-              <Paper p="sm" shadow="xl" mr="xl" mb="xl">
-                <Title order={2} mb="sm">
-                  Shows
-                </Title>
-                <Shows {...shows} />
-              </Paper>
-            </Container>
-            <PromoVideo />
+        <Container fluid visibleFrom="md" style={{ height: '100%', maxWidth: '1500px' }} px="md">
+          <Flex
+            justify="space-between"
+            align="center"
+            direction="row"
+            style={{ height: '100%', ...foreground }}
+          >
+            <Image src={heroLogo} alt="As Above logo" unoptimized={false} />
+            <Flex justify="space-between" align="center" direction="column">
+              <Container size="sm">
+                <Paper p="sm" shadow="xl" mr="xl" mb="xl" radius="md">
+                  <Title order={2} mb="sm">
+                    Shows
+                  </Title>
+                  <Shows {...shows} />
+                </Paper>
+              </Container>
+              <PromoVideo />
+            </Flex>
           </Flex>
-        </Flex>
+        </Container>
 
         {/* Mobile stacked header */}
         <Flex
