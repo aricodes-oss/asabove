@@ -11,10 +11,6 @@ export default async function Home() {
 
   return (
     <>
-      <div>
-        <Frame>Hello!</Frame>
-      </div>
-
       <Header shows={shows!} />
       <Container size="sm">
         <MailingList />

@@ -1,23 +1,39 @@
+$width: 1241;
+$height: 880;
+
+$xpadding: 12%;
+$ypadding: 13%;
+
 .frame {
   background-image: url('/masked frame.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
 
-  position: relative;
   display: flex;
   align-items: stretch;
   justify-content: stretch;
+  aspect-ratio: 1.41023;
 
   &.horizontal {
-    aspect-ratio: 1241 / 880;
-    padding: 16% 14%;
+    .content {
+      padding: $xpadding $ypadding;
+      position: relative;
+      top: 4px;
+      left: 3px;
+    }
   }
 
   &.vertical {
-    aspect-ratio: 880 / 1241;
-    // Vertical orientation: frame needs more top/bottom padding since aspect ratio is narrower
-    padding: 26% 14%;
+    aspect-ratio: #{$height} / #{$width};
+
+    .content {
+      padding: 25% $xpadding;
+      position: relative;
+      top: 5px;
+      left: 2px;
+    }
+
   }
 
   .content {
