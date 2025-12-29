@@ -17,7 +17,7 @@ export default function Frame({
   ...props
 }: FrameProps) {
   const style = {
-    [`max-${vertical ? 'height' : 'width'}`]: `${maxSize}px`,
+    [`max${vertical ? 'Height' : 'Width'}`]: `${maxSize}px`,
   };
   return (
     <div
