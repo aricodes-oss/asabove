@@ -7,7 +7,6 @@ import PromoVideo from '@/components/PromoVideo';
 import { Box, Container, Flex, Paper, Title } from '@mantine/core';
 import { useElementSize, useMergedRef, useMouse } from '@mantine/hooks';
 import Image from 'next/image';
-import { useEffect } from 'react';
 
 import Shows, { type ShowsProps } from '../Shows';
 import classes from './Header.module.scss';
