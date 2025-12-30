@@ -1,0 +1,64 @@
+.header {
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  position: relative;
+  box-shadow: black 0px 0px 24px;
+  overflow: hidden; // Tilt/transform effects
+
+  &:not(:only-child) {
+    margin-bottom: 24px;
+  }
+
+  .hero {
+    padding-top: 64px;
+    height: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+
+    .inner {
+      @include mt.smaller-than(mt.$breakpoint-md) {
+        align-items: flex-start;
+      }
+
+      @include mt.larger-than(mt.$breakpoint-md) {
+        height: 80%;
+      }
+    }
+
+    .left {
+      object-fit: contain;
+      max-width: 100vw;
+      overflow: hidden;
+      @include mt.larger-than(mt.$breakpoint-md) {
+        align-self: flex-start;
+        max-height: 40vh;
+      }
+    }
+  }
+
+  .background,
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  .background {
+    z-index: -1;
+    perspective: 10px;
+    transform-style: preserve-3d;
+  }
+
+  .content {
+    z-index: 1;
+    background: #000000;
+    position: relative;
+    perspective: 1000px;
+
+    background: radial-gradient(circle, mt.$transparent-sepia 0% 20%, black 100%);
+  }
+}
