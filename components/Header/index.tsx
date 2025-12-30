@@ -1,4 +1,4 @@
-import { Anchor, Group } from '@mantine/core';
+import { Anchor, Container, Group } from '@mantine/core';
 import cx from 'clsx';
 import { Gaegu } from 'next/font/google';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ const gaegu = Gaegu({
 
 export default function Header() {
   return (
-    <>
+    <Container size="lg">
       <Anchor component={Link} href="/" underline="never">
         <div className={cx(classes.root, gaegu.className)}>
           <span className={classes.left}>
@@ -21,13 +21,13 @@ export default function Header() {
           </span>
           <span className={classes.right}>
             <span className={classes.name}>As Above</span>
-            's website
+            &apos;s website
           </span>
         </div>
       </Anchor>
       <Group justify="center" gap="md" className={classes.socials}>
         <Socials />
       </Group>
-    </>
+    </Container>
   );
 }

@@ -19,13 +19,13 @@ export default function Frame({
   const style = {
     [`max${vertical ? 'Height' : 'Width'}`]: `${maxSize}px`,
   };
+  const directional = vertical ? classes.vertical : classes.horizontal;
+
   return (
-    <div
-      className={clsx(classes.frame, vertical ? classes.vertical : classes.horizontal, className)}
-      style={style}
-      {...props}
-    >
-      <div className={classes.content}>{children}</div>
+    <div className={clsx(classes.container, directional, className)}>
+      <div className={clsx(classes.frame, directional)} style={style} {...props}>
+        <div className={classes.content}>{children}</div>
+      </div>
     </div>
   );
 }
