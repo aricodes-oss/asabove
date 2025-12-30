@@ -5,8 +5,7 @@ $xpadding: 12%;
 $ypadding: 13%;
 
 .container {
-  width: $width;
-  height: $height;
+  max-width: calc($width / 2.5);
 }
 
 .frame {
@@ -14,6 +13,7 @@ $ypadding: 13%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
+  flex-shrink: 0;
 
   display: flex;
   align-items: stretch;

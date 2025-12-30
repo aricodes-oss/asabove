@@ -13,6 +13,8 @@ $accent-font: 72px;
   line-height: 0.9;
   padding-top: 16px;
   color: white !important;
+  z-index: 999;
+  position: relative;
 
   @include mt.larger-than(mt.$breakpoint-xs) {
     font-size: $normal-font;

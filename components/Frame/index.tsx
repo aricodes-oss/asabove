@@ -1,17 +1,20 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 
 import classes from './Frame.module.scss';
 
 export interface FrameProps extends React.HTMLAttributes<HTMLDivElement> {
-  horizontal?: boolean;
+  vertical?: boolean;
   children?: ReactNode;
   maxSize?: number;
+  href?: string;
 }
 
 export default function Frame({
-  horizontal: vertical = false,
+  vertical = false,
   maxSize = 480,
+  href = '',
   children,
   className,
   ...props
@@ -23,9 +26,11 @@ export default function Frame({
 
   return (
     <div className={clsx(classes.container, directional, className)}>
-      <div className={clsx(classes.frame, directional)} style={style} {...props}>
-        <div className={classes.content}>{children}</div>
-      </div>
+      <Link href={href}>
+        <div className={clsx(classes.frame, directional)} style={style} {...props}>
+          <div className={classes.content}>{children}</div>
+        </div>
+      </Link>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.root {
+  margin-right: 32px;
+  position: relative;
+
+  .label {
+    font-size: 48px;
+  }
+
+  .img {
+    object-fit: contain;
+  }
+}

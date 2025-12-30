@@ -1,0 +1,12 @@
+.frame {
+  // Skew and put behind header on desktop
+  @include mt.larger-than(mt.$breakpoint-xl) {
+    display: block;
+    width: calc(100% - 100px);
+    position: absolute;
+    top: -16px;
+    left: 32px;
+    transform: rotate(-5deg);
+    overflow: hidden;
+  }
+}
