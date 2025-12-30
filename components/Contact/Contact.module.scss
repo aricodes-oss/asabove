@@ -1,7 +1,7 @@
 .root {
-  margin-right: 32px;
-  position: relative;
-
+  @include mt.larger-than(mt.$breakpoint-md) {
+    margin-right: 32px;
+  }
   .label {
     font-size: 48px;
   }

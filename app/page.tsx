@@ -5,7 +5,7 @@ import Contact from '@/components/Contact';
 import Frame from '@/components/Frame';
 import Header from '@/components/Header';
 import { socials } from '@/constants';
-import { Container, Group } from '@mantine/core';
+import { Container, Flex, Group } from '@mantine/core';
 import Image from 'next/image';
 
 import classes from './page.module.scss';
@@ -25,9 +25,9 @@ export default async function Home() {
       </div>
 
       <Container fluid>
-        <Group justify="flex-end" wrap="nowrap">
+        <Flex justify={{ base: 'center', md: 'flex-end' }} wrap="nowrap">
           <Contact />
-        </Group>
+        </Flex>
       </Container>
     </>
   );
