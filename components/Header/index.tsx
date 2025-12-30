@@ -7,6 +7,7 @@ import Socials from '../Socials';
 import classes from './Header.module.scss';
 
 const gaegu = Gaegu({
+  subsets: ['latin'],
   weight: ['400', '700'],
 });
 

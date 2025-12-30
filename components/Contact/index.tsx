@@ -8,6 +8,7 @@ import Link from 'next/link';
 import classes from './Contact.module.scss';
 
 const gaegu = Gaegu({
+  subsets: ['latin'],
   weight: ['400'],
 });
 

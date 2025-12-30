@@ -5,7 +5,7 @@ import Contact from '@/components/Contact';
 import Frame from '@/components/Frame';
 import Header from '@/components/Header';
 import { socials } from '@/constants';
-import { Container, Flex, Group } from '@mantine/core';
+import { Container, Flex } from '@mantine/core';
 import Image from 'next/image';
 
 import classes from './page.module.scss';
