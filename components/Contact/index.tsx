@@ -15,7 +15,7 @@ const gaegu = Gaegu({
 export default function Contact() {
   return (
     <Stack gap="xs" className={classes.root} align="center">
-      <span className={cx(gaegu.className, classes.label)}>Contact</span>
+      <span className={cx(gaegu.className, classes.label)}>contact</span>
       <Link href="/contact">
         <Image src={phone} alt="Contact us" className={classes.img} />
       </Link>
