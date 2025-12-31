@@ -1,5 +1,5 @@
 import phone from '@/public/masked phone.png';
-import { Stack, Text } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import cx from 'clsx';
 import { Gaegu } from 'next/font/google';
 import Image from 'next/image';
