@@ -27,7 +27,12 @@ export default async function Home() {
           align={{ base: 'center', md: 'flex-start' }}
         >
           <Frame href={instagram!.href} className={classes.frame}>
-            <Image src="/band-lowres.jpg" alt="Photo of the band" fill={true} objectFit="contain" />
+            <Image
+              src="/band-lowres2.jpg"
+              alt="Photo of the band"
+              fill={true}
+              objectFit="contain"
+            />
           </Frame>
           <Flex direction={{ base: 'column', md: 'row' }} className={classes.right}>
             <Contact />
