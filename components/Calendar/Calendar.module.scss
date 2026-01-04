@@ -1,0 +1,69 @@
+.heading {
+  font-size: 48px;
+  text-align: center;
+}
+
+.root {
+  flex-shrink: 0;
+
+  position: relative;
+  width: 374px;
+  height: 461px;
+  text-align: center;
+  color: black;
+
+  .background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url('/masked calendar.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .month {
+    position: absolute;
+    left: 88px;
+    top: 96px;
+    overflow: hidden;
+
+    background-color: white;
+    z-index: -1;
+
+    width: 200px;
+    height: 28px;
+    font-size: 46px;
+    line-height: 0.58;
+  }
+
+  .day {
+    position: absolute;
+    left: 95px;
+    top: 184px;
+    overflow: hidden;
+
+    background-color: white;
+    z-index: -1;
+
+    width: 180px;
+    height: 130px;
+    font-size: 105px;
+    line-height: 1.2;
+  }
+
+  .location {
+    position: absolute;
+    left: 90px;
+    top: 375px;
+    overflow: hidden;
+
+    background-color: white;
+    z-index: -1;
+
+    width: 198px;
+    height: 28px;
+    font-size: 32px;
+    line-height: 0.8;
+  }
+}
