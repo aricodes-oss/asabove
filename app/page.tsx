@@ -31,7 +31,7 @@ export default async function Home() {
               src="/band-lowres2.jpg"
               alt="Photo of the band"
               fill={true}
-              objectFit="contain"
+              className={classes.img}
             />
           </Frame>
           <Flex direction={{ base: 'column', md: 'row' }} className={classes.right}>

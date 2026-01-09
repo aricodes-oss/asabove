@@ -28,8 +28,6 @@ export default function Calendar(props: CalendarProps = { upcoming: [], past: []
   const showQuery = useQuery({ queryKey: ['shows'], queryFn: getShows, initialData: props });
   const { upcoming } = showQuery.data!;
 
-  console.log(upcoming);
-
   if (!upcoming || upcoming.length < 1) {
     return null;
   }
