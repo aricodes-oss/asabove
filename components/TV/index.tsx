@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import classes from './TV.module.scss';
 
 export interface TVProps {
@@ -7,7 +5,7 @@ export interface TVProps {
   height?: number;
 }
 
-export default function TV({ width, height }: TVProps) {
+export default function TV() {
   return (
     <div className={classes.root}>
       <iframe
