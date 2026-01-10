@@ -5,7 +5,7 @@ $xpadding: 12%;
 $ypadding: 13%;
 
 .container {
-  max-width: calc($width / 2.5);
+  max-width: calc(#{$width}px / 2.5);
   width: 100%;
 }
 
