@@ -5,6 +5,7 @@ import Calendar from '@/components/Calendar';
 import Contact from '@/components/Contact';
 import Frame from '@/components/Frame';
 import Header from '@/components/Header';
+import TV from '@/components/TV';
 import { socials } from '@/constants';
 import { Container, Flex } from '@mantine/core';
 import Image from 'next/image';
@@ -39,6 +40,8 @@ export default async function Home() {
             <Calendar {...shows}></Calendar>
           </Flex>
         </Flex>
+
+        <TV />
       </Container>
     </>
   );
