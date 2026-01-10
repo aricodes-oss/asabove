@@ -21,6 +21,11 @@ $ypadding: 13%;
   justify-content: stretch;
   aspect-ratio: 1.41023;
   padding: 32px 16px;
+  position: relative;
+
+  .link {
+    z-index: 9999;
+  }
 
   &.horizontal {
     .content {

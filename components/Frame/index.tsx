@@ -26,7 +26,7 @@ export default function Frame({
 
   return (
     <div className={clsx(classes.container, directional, className)}>
-      <Link href={href}>
+      <Link href={href} className={classes.link}>
         <div className={clsx(classes.frame, directional)} style={style} {...props}>
           <div className={classes.content}>{children}</div>
         </div>

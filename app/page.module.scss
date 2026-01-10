@@ -1,15 +1,11 @@
 .header {
   @include mt.larger-than(mt.$breakpoint-xl) {
     position: relative;
-    top: -128px;
 
     .frame {
-      transform: rotate(-5deg);
-    }
-
-    .right {
       position: relative;
-      top: 128px;
+      transform: rotate(-5deg);
+      top: -128px;
     }
   }
 
