@@ -3,10 +3,16 @@ import SpaceBackground from '@/components/SpaceBackground';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
+import { Gaegu } from 'next/font/google';
 import Script from 'next/script';
 
 import Providers from './providers';
 import theme from './theme';
+
+const gaegu = Gaegu({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'As Above',
@@ -31,7 +37,7 @@ export default function RootLayout({
         <Script defer src="/mailerlite.js" />
         <ColorSchemeScript />
       </head>
-      <body>
+      <body className={gaegu.className}>
         <MantineProvider forceColorScheme="dark" theme={theme}>
           <Providers>
             <SpaceBackground clouds={false}>{children}</SpaceBackground>
