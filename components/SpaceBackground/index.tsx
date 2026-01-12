@@ -1,4 +1,5 @@
 // See https://codepen.io/agoodwin/pen/NMJoER for original implementation
+import Snow from './Snow';
 import classes from './SpaceBackground.module.scss';
 
 export interface SpaceBackgroundProps {
@@ -6,6 +7,7 @@ export interface SpaceBackgroundProps {
   stars?: boolean;
   twinkling?: boolean;
   clouds?: boolean;
+  snowing?: boolean;
 }
 
 export default function SpaceBackground({
@@ -13,6 +15,7 @@ export default function SpaceBackground({
   stars = true,
   twinkling = true,
   clouds = true,
+  snowing = false,
 }: SpaceBackgroundProps) {
   return (
     <>
@@ -20,6 +23,7 @@ export default function SpaceBackground({
         {stars && <div className={classes.stars} />}
         {twinkling && <div className={classes.twinkling} />}
         {clouds && <div className={classes.clouds} />}
+        {snowing && <Snow />}
       </div>
       {children}
     </>

@@ -8,9 +8,20 @@ const FALLBACK_DATE = '2005-06-07';
 const startTime = (show: calendar_v3.Schema$Event) =>
   new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
 
-export async function getShows() {
+const timerRegex = /\s?:timer:\s?/i;
+
+const isTimer = (label: string) => timerRegex.test(label);
+
+const mkDaysUntil = () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return (date: Date) => Math.ceil((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+};
+
+export async function getEvents() {
   'use cache';
 
+  const daysUntil = mkDaysUntil();
   const events = await calendar.events.list({ calendarId, maxResults: 1500 });
 
   if (!events.data.items) {
@@ -18,17 +29,39 @@ export async function getShows() {
   }
 
   // Sort into upcoming and past
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const daysUntil = (date: Date) =>
-    Math.ceil((date.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+  return events.data.items.toSorted((a, b) => daysUntil(startTime(a)) - daysUntil(startTime(b)));
+}
 
-  const shows = events.data.items.toSorted(
-    (a, b) => daysUntil(startTime(a)) - daysUntil(startTime(b)),
-  );
+export async function getShows() {
+  const daysUntil = mkDaysUntil();
+  let shows = await getEvents();
+  if (!shows) {
+    return null;
+  }
 
-  const upcoming = shows.filter(show => daysUntil(startTime(show)) >= 0);
-  const past = shows.filter(show => daysUntil(startTime(show)) < 0);
+  shows = shows.filter(e => !isTimer(e.summary!));
+
+  const upcoming = shows?.filter(show => daysUntil(startTime(show)) >= 0);
+  const past = shows?.filter(show => daysUntil(startTime(show)) < 0);
+
+  return { upcoming, past };
+}
+
+export async function getCountdowns() {
+  const daysUntil = mkDaysUntil();
+  let events = await getEvents();
+  if (!events) {
+    return null;
+  }
+
+  events = events.filter(e => isTimer(e.summary!));
+
+  const upcoming = events
+    ?.filter(event => daysUntil(startTime(event)) >= 0)
+    .map(e => ({ ...e, summary: e.summary!.replace(timerRegex, '') }));
+  const past = events
+    ?.filter(event => daysUntil(startTime(event)) < 0)
+    .map(e => ({ ...e, summary: e.summary!.replace(timerRegex, '') }));
 
   return { upcoming, past };
 }

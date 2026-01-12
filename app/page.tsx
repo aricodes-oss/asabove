@@ -1,6 +1,6 @@
 'use server';
 
-import { getShows } from '@/api';
+import { getCountdowns, getShows } from '@/api';
 import Calendar from '@/components/Calendar';
 import Contact from '@/components/Contact';
 import Frame from '@/components/Frame';
@@ -16,6 +16,9 @@ const instagram = socials.find(link => link.text === 'Instagram');
 
 export default async function Home() {
   const shows = await getShows();
+  const countdowns = await getCountdowns();
+
+  console.log(countdowns);
 
   return (
     <>
@@ -41,7 +44,14 @@ export default async function Home() {
           </Flex>
         </Flex>
 
-        <TV />
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          align={{ base: 'center', md: 'flex-start' }}
+        >
+          <div style={{ flexGrow: 1 }}>
+            <TV />
+          </div>
+        </Flex>
       </Container>
     </>
   );
