@@ -6,6 +6,14 @@
       position: relative;
       transform: rotate(-5deg);
       top: -128px;
+      flex-grow: 1;
+      max-width: 510px;
+    }
+  }
+
+  @include mt.smaller-than(mt.$breakpoint-xs) {
+    .frame {
+      max-width: max-content;
     }
   }
 

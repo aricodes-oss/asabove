@@ -5,8 +5,13 @@ $xpadding: 12%;
 $ypadding: 13%;
 
 .container {
-  max-width: calc(#{$width}px / 2.5);
+  min-width: calc(#{$width}px / 2.5);
   width: 100%;
+
+  @include mt.smaller-than(mt.$breakpoint-xs) {
+    min-width: calc(#{$width}px / 3.5);
+  }
+
 }
 
 .frame {
@@ -15,6 +20,7 @@ $ypadding: 13%;
   background-repeat: no-repeat;
   background-position: center;
   flex-shrink: 0;
+  min-width: calc(#{$width} / 2.5) + px;
 
   display: flex;
   align-items: stretch;
