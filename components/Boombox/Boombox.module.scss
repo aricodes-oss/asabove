@@ -1,0 +1,9 @@
+$width: 384;
+$height: 241;
+
+.root {
+  aspect-ratio: #{$width} / #{$height};
+  max-width: #{$width}px;
+  max-height: #{$height}px;
+  object-fit: contain;
+}

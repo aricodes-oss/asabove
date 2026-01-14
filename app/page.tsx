@@ -1,6 +1,7 @@
 'use server';
 
 import { getCountdowns, getShows } from '@/api';
+import Boombox from '@/components/Boombox';
 import Calendar from '@/components/Calendar';
 import Contact from '@/components/Contact';
 import Countdown from '@/components/Countdown';
@@ -15,6 +16,7 @@ import Image from 'next/image';
 import classes from './page.module.scss';
 
 const instagram = socials.find(link => link.text === 'Instagram');
+const bandcamp = socials.find(link => link.text === 'Bandcamp');
 export default async function Home() {
   const shows = await getShows();
   const countdowns = await getCountdowns();
@@ -58,11 +60,12 @@ export default async function Home() {
 
         <Flex
           direction={{ base: 'column', lg: 'row' }}
-          align={{ base: 'center', lg: 'flex-start' }}
+          align={{ base: 'center', lg: 'flex-end' }}
+          justify={{ base: 'center', lg: 'flex-start' }}
+          gap={{ base: 'md', lg: 'xs' }}
         >
-          <div style={{ flexGrow: 1 }}>
-            <TV />
-          </div>
+          <TV />
+          <Boombox href={bandcamp!.href} />
         </Flex>
       </Container>
     </>
