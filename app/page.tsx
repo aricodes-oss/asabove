@@ -7,7 +7,6 @@ import Contact from '@/components/Contact';
 import Countdown from '@/components/Countdown';
 import Frame from '@/components/Frame';
 import Header from '@/components/Header';
-import Sofa from '@/components/Sofa';
 import TV from '@/components/TV';
 import { socials } from '@/constants';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
