@@ -1,0 +1,11 @@
+$width: 657;
+$height: 638;
+
+.root {
+  aspect-ratio: #{$width} / #{$height};
+  flex-grow: 1;
+  padding: 8px;
+  @include mt.smaller-than(mt.$breakpoint-xl) {
+    display: none;
+  }
+}
