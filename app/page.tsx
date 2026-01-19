@@ -9,6 +9,7 @@ import Frame from '@/components/Frame';
 import Header from '@/components/Header';
 import TV from '@/components/TV';
 import { socials } from '@/constants';
+import { calendar_v3 } from '@googleapis/calendar';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import { Box, Container, Flex } from '@mantine/core';
 import Image from 'next/image';
@@ -17,6 +18,8 @@ import classes from './page.module.scss';
 
 const instagram = socials.find(link => link.text === 'Instagram');
 const bandcamp = socials.find(link => link.text === 'Bandcamp');
+
+const FALLBACK_DATE = '2005-06-07';
 
 const startTime = (show: calendar_v3.Schema$Event) => {
   const res = new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
