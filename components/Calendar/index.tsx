@@ -14,8 +14,11 @@ export interface CalendarProps {
 }
 const FALLBACK_DATE = '2005-06-07';
 
-const startTime = (show: calendar_v3.Schema$Event) =>
-  new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
+const startTime = (show: calendar_v3.Schema$Event) => {
+  const res = new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
+  res.setDate(res.getDate() + 1);
+  return res;
+};
 
 export default function Calendar(props: CalendarProps = { upcoming: [], past: [] }) {
   const showQuery = useQuery({ queryKey: ['shows'], queryFn: getShows, initialData: props });

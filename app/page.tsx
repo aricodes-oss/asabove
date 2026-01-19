@@ -17,6 +17,13 @@ import classes from './page.module.scss';
 
 const instagram = socials.find(link => link.text === 'Instagram');
 const bandcamp = socials.find(link => link.text === 'Bandcamp');
+
+const startTime = (show: calendar_v3.Schema$Event) => {
+  const res = new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
+  res.setDate(res.getDate() + 1);
+  return res;
+};
+
 export default async function Home() {
   const shows = await getShows();
   const countdowns = await getCountdowns();
@@ -47,9 +54,7 @@ export default async function Home() {
               />
             </Frame>
             <Box visibleFrom="sm" px={16}>
-              {countTo && (
-                <Countdown to={new Date(countTo.start!.date as string)} title={countTo.summary} />
-              )}
+              {countTo && <Countdown to={startTime(countTo)} title={countTo.summary} />}
             </Box>
           </Flex>
           <Flex direction={{ base: 'column', lg: 'row' }} className={classes.right}>
