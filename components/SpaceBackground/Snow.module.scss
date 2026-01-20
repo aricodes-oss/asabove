@@ -34,6 +34,7 @@ $grad: ();
   background-size: $w + px $w + px;
   animation: snow $s linear infinite;
   content: "";
+  z-index: 999;
 }
 .snow:after {
   margin-left: math.div(-$w, 3) + px;
