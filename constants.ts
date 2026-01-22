@@ -29,3 +29,8 @@ export const socials = [
     href: 'https://open.spotify.com/artist/2LRlqAqErJBfCwwbbNI3BZ?si=G2_B6MubSyycooyCG9-qig',
   },
 ];
+
+export const portlandGeo = {
+  latitude: 45.523064,
+  longitude: -122.676483,
+};
