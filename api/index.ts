@@ -2,6 +2,7 @@
 
 import { calendar, calendarId } from '@/calendar';
 import { calendar_v3 } from '@googleapis/calendar';
+import { cacheLife } from 'next/cache';
 
 const FALLBACK_DATE = '2005-06-07';
 
@@ -20,6 +21,7 @@ const mkDaysUntil = () => {
 
 export async function getEvents() {
   'use cache';
+  cacheLife('events');
 
   const daysUntil = mkDaysUntil();
   const events = await calendar.events.list({ calendarId, maxResults: 1500 });

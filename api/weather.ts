@@ -1,11 +1,13 @@
 'use server';
 
 import { portlandGeo } from '@/constants';
+import { cacheLife } from 'next/cache';
 import { fetchWeatherApi } from 'openmeteo';
 
 // Fetches current meteorological data for Portland
 export async function currentForecast() {
   'use cache';
+  cacheLife('weather');
 
   const params = {
     latitude: [portlandGeo.latitude],

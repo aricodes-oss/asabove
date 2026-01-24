@@ -3,6 +3,19 @@ import path from 'node:path';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  cacheComponents: true,
+  cacheLife: {
+    weather: {
+      stale: 3600, // 1h
+      revalidate: 900, // 15m
+      expire: 86400, // 1d
+    },
+    events: {
+      stale: 900, // 15m
+      revalidate: 300, // 5m
+      expire: 86400, // 1d
+    },
+  },
   images: {
     remotePatterns: [
       {
