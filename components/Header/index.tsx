@@ -1,3 +1,5 @@
+'use client';
+
 import { Anchor, Container, Group } from '@mantine/core';
 import Link from 'next/link';
 

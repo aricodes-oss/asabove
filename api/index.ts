@@ -3,6 +3,7 @@
 import { calendar, calendarId } from '@/calendar';
 import { calendar_v3 } from '@googleapis/calendar';
 import { cacheLife } from 'next/cache';
+import { connection } from 'next/server';
 
 const FALLBACK_DATE = '2005-06-07';
 
@@ -35,6 +36,7 @@ export async function getEvents() {
 }
 
 export async function getShows() {
+  await connection();
   const daysUntil = mkDaysUntil();
   let shows = await getEvents();
   if (!shows) {
@@ -50,6 +52,7 @@ export async function getShows() {
 }
 
 export async function getCountdowns() {
+  await connection();
   const daysUntil = mkDaysUntil();
   let events = await getEvents();
   if (!events) {

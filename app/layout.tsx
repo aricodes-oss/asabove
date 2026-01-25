@@ -5,6 +5,7 @@ import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
 import { Gaegu } from 'next/font/google';
 import Script from 'next/script';
+import { Suspense } from 'react';
 
 import Providers from './providers';
 import theme from './theme';
@@ -40,7 +41,9 @@ export default function RootLayout({
       <body className={gaegu.className}>
         <MantineProvider forceColorScheme="dark" theme={theme}>
           <Providers>
-            <SpaceBackground clouds={false}>{children}</SpaceBackground>
+            <SpaceBackground clouds={false}>
+              <Suspense fallback={null}>{children}</Suspense>
+            </SpaceBackground>
           </Providers>
           <ScrollToTop />
         </MantineProvider>

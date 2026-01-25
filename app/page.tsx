@@ -1,6 +1,7 @@
 'use server';
 
 import { getCountdowns, getShows } from '@/api';
+import { currentForecast } from '@/api/weather';
 import Boombox from '@/components/Boombox';
 import Calendar from '@/components/Calendar';
 import Contact from '@/components/Contact';
@@ -22,6 +23,7 @@ const bandcamp = socials.find(link => link.text === 'Bandcamp');
 const FALLBACK_DATE = '2005-06-07';
 
 const startTime = (show: calendar_v3.Schema$Event) => {
+  'use client';
   const res = new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
   res.setDate(res.getDate() + 1);
   return res;
@@ -30,11 +32,14 @@ const startTime = (show: calendar_v3.Schema$Event) => {
 export default async function Home() {
   const shows = await getShows();
   const countdowns = await getCountdowns();
+  const forecast = await currentForecast();
   let countTo = null;
 
   if (countdowns?.upcoming?.length) {
     countTo = countdowns.upcoming[0];
   }
+
+  console.log(forecast);
 
   return (
     <>
