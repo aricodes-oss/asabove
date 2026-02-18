@@ -1,14 +1,9 @@
 'use server';
 
 import { calendar, calendarId } from '@/calendar';
-import { calendar_v3 } from '@googleapis/calendar';
+import { startTime } from '@/utils';
 import { cacheLife } from 'next/cache';
 import { connection } from 'next/server';
-
-const FALLBACK_DATE = '2005-06-07';
-
-const startTime = (show: calendar_v3.Schema$Event) =>
-  new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
 
 const timerRegex = /\s?:timer:\s?/i;
 

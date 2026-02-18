@@ -1,6 +1,7 @@
 'use client';
 
 import { getShows } from '@/api';
+import { startTime } from '@/utils';
 import { calendar_v3 } from '@googleapis/calendar';
 import { Flex } from '@mantine/core';
 import { useQuery } from '@tanstack/react-query';
@@ -12,10 +13,9 @@ export interface CalendarProps {
   upcoming?: calendar_v3.Schema$Event[];
   past?: calendar_v3.Schema$Event[];
 }
-const FALLBACK_DATE = '2005-06-07';
 
-const startTime = (show: calendar_v3.Schema$Event) => {
-  const res = new Date(show.start?.date ?? show.start?.dateTime ?? FALLBACK_DATE);
+const calendarStartTime = (show: calendar_v3.Schema$Event) => {
+  const res = startTime(show);
   res.setDate(res.getDate() + 1);
   return res;
 };
@@ -29,7 +29,7 @@ export default function Calendar(props: CalendarProps = { upcoming: [], past: []
   }
 
   const next = upcoming[0];
-  const startsAt = startTime(next);
+  const startsAt = calendarStartTime(next);
 
   return (
     <Flex direction="column" justify="center" align="center">
