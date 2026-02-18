@@ -1,7 +1,6 @@
 'use server';
 
 import { getCountdowns, getShows } from '@/api';
-import { currentForecast } from '@/api/weather';
 import Boombox from '@/components/Boombox';
 import Calendar from '@/components/Calendar';
 import Contact from '@/components/Contact';
@@ -23,14 +22,11 @@ const bandcamp = socials.find(link => link.text === 'Bandcamp');
 export default async function Home() {
   const shows = await getShows();
   const countdowns = await getCountdowns();
-  const forecast = await currentForecast();
   let countTo = null;
 
   if (countdowns?.upcoming?.length) {
     countTo = countdowns.upcoming[0];
   }
-
-  console.log(forecast);
 
   return (
     <>

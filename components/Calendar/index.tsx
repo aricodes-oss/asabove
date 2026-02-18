@@ -14,12 +14,6 @@ export interface CalendarProps {
   past?: calendar_v3.Schema$Event[];
 }
 
-const calendarStartTime = (show: calendar_v3.Schema$Event) => {
-  const res = startTime(show);
-  res.setDate(res.getDate() + 1);
-  return res;
-};
-
 export default function Calendar(props: CalendarProps = { upcoming: [], past: [] }) {
   const showQuery = useQuery({ queryKey: ['shows'], queryFn: getShows, initialData: props });
   const { upcoming } = showQuery.data!;
@@ -29,7 +23,7 @@ export default function Calendar(props: CalendarProps = { upcoming: [], past: []
   }
 
   const next = upcoming[0];
-  const startsAt = calendarStartTime(next);
+  const startsAt = startTime(next);
 
   return (
     <Flex direction="column" justify="center" align="center">
